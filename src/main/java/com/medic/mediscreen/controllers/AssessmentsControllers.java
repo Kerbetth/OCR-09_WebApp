@@ -1,11 +1,15 @@
 package com.medic.mediscreen.controllers;
 
 
+import com.medic.mediscreen.domain.Patient;
 import com.medic.mediscreen.repositories.MediscreenPatientClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 /**
  * -the root of the url give link to login or create an account
@@ -13,15 +17,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 
 @Controller
-public class HomeControllers {
-
+public class AssessmentsControllers {
 
     @Autowired
     private MediscreenPatientClient mediscreenPatientClient;
 
-    @RequestMapping("/")
-    public String getLog(Model model) {
-        return "LogPage";
+    @GetMapping("/asses/{id}")
+    public String assesById(@PathVariable int id) {
+
+        return "bidList/add";
     }
 
 }

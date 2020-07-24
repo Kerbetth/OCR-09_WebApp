@@ -7,7 +7,6 @@ import java.util.Set;
 public class Patient {
     @GeneratedValue
     Integer patId;
-
     String family;
     String given;
     Date dob;
