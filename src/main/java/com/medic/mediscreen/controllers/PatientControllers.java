@@ -22,18 +22,45 @@ public class PatientControllers {
     @Autowired
     private MediscreenPatientClient mediscreenPatientClient;
 
-    @GetMapping("/patient/add")
-    public String addBidForm(Patient bid, Model model) {
-        model.addAttribute("patient", new Patient());
-        return "bidList/add";
+    @GetMapping("/patient/list")
+    public String listPatient(Model model) {
+        model.addAttribute("patients", mediscreenPatientClient.getPatientList());
+        return "patient";
     }
 
-    @PostMapping("/patient/validate")
+    @GetMapping("/patient/add")
+    public String addPatient(Patient bid, Model model) {
+        model.addAttribute("patient", new Patient());
+        return "patient/adding";
+    }
+
+    @PostMapping("/patient/adding")
     public String validate(Patient patient, BindingResult result) {
         if (result.hasErrors()) {
             return "patient/add";
         }
         mediscreenPatientClient.addAPatient(patient);
+        return "redirect:/patient/list";
+    }
+
+    @GetMapping("/patient/set")
+    public String setPatient(Patient bid, Model model) {
+        model.addAttribute("patient", new Patient());
+        return "patient/setting";
+    }
+
+    @PostMapping("/patient/setting")
+    public String settingPatient(Patient patient, BindingResult result) {
+        if (result.hasErrors()) {
+            return "patient/set";
+        }
+        mediscreenPatientClient.setAPatient(patient);
+        return "redirect:/patient/list";
+    }
+
+    @DeleteMapping("/patient/delete/{id}")
+    public String deletePatient(@PathVariable("id") int id) {
+        mediscreenPatientClient.deleteAPatient(id);
         return "redirect:/patient/list";
     }
 }

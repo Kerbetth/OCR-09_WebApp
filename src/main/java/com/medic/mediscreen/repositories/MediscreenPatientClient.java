@@ -2,10 +2,7 @@ package com.medic.mediscreen.repositories;
 
 import com.medic.mediscreen.domain.Patient;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,4 +19,9 @@ public interface MediscreenPatientClient {
     @PostMapping(value = "/Patient/add")
     void addAPatient(@RequestBody Patient patient);
 
+    @PutMapping(value = "/Patient/set")
+    void setAPatient(@RequestBody Patient patient);
+
+    @DeleteMapping(value = "/Patient/del")
+    void deleteAPatient(@RequestParam int patientId);
 }
