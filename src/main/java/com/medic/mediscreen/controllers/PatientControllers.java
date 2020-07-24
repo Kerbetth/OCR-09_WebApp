@@ -31,7 +31,7 @@ public class PatientControllers {
     @GetMapping("/patient/add")
     public String addPatient(Patient bid, Model model) {
         model.addAttribute("patient", new Patient());
-        return "patient/adding";
+        return "addPatient";
     }
 
     @PostMapping("/patient/adding")
@@ -43,10 +43,10 @@ public class PatientControllers {
         return "redirect:/patient/list";
     }
 
-    @GetMapping("/patient/set")
-    public String setPatient(Patient bid, Model model) {
-        model.addAttribute("patient", new Patient());
-        return "patient/setting";
+    @GetMapping("/patient/set/{id}")
+    public String setPatient(@PathVariable("id") int id, Model model) {
+        model.addAttribute("patient", mediscreenPatientClient.getPatient(id));
+        return "setPatient";
     }
 
     @PostMapping("/patient/setting")
