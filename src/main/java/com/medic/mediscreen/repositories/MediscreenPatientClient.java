@@ -7,14 +7,17 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 
-@FeignClient(name = "mediscreen_patient", url = "localhost:8081")
+@FeignClient(name = "mediscreenPatient", url = "localhost:8081")
 public interface MediscreenPatientClient {
 
     @GetMapping(value = "/Patients")
     List<Patient> getPatientList();
 
     @GetMapping(value = "/Patient/{id}")
-    Patient getPatient(@PathVariable("id") int id);
+    Patient getPatientById(@PathVariable("id") int id);
+
+    @GetMapping(value = "/Patient/{familyName}")
+    int getIdByFamilyName(@PathVariable("familyName") String familyName);
 
     @PostMapping(value = "/Patient/add")
     void addAPatient(@RequestBody Patient patient);

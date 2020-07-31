@@ -15,11 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class HomeControllers {
 
-
-    @Autowired
-    private MediscreenPatientClient mediscreenPatientClient;
-
-    @RequestMapping("/")
+    @RequestMapping(value = "/")
     public String getLog(Model model) {
         return "LogPage";
     }

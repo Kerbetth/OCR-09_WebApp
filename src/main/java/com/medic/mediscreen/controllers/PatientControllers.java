@@ -1,15 +1,14 @@
 package com.medic.mediscreen.controllers;
 
 
-import com.medic.mediscreen.domain.PatHistory;
 import com.medic.mediscreen.domain.Patient;
-import com.medic.mediscreen.repositories.MediscreenPatHistoryClient;
 import com.medic.mediscreen.repositories.MediscreenPatientClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  * -the root of the url give link to login or create an account
@@ -22,45 +21,50 @@ public class PatientControllers {
     @Autowired
     private MediscreenPatientClient mediscreenPatientClient;
 
-    @GetMapping("/patient/list")
+    @GetMapping(value = "/patients/list")
     public String listPatient(Model model) {
         model.addAttribute("patients", mediscreenPatientClient.getPatientList());
         return "patient";
     }
+    @GetMapping(value = "/patients/patient/{familyName}")
+    public int getPatientId(@PathVariable("familyName") String familyName) {
+        return mediscreenPatientClient.getIdByFamilyName(familyName);
+    }
 
-    @GetMapping("/patient/add")
-    public String addPatient(Patient bid, Model model) {
+    @GetMapping(value = "/patients/add")
+    public String addPatient( Model model) {
         model.addAttribute("patient", new Patient());
         return "addPatient";
     }
 
-    @PostMapping("/patient/adding")
+    @PostMapping(value = "/patients/adding")
     public String validate(Patient patient, BindingResult result) {
         if (result.hasErrors()) {
-            return "patient/add";
+            return "addPatient";
         }
         mediscreenPatientClient.addAPatient(patient);
-        return "redirect:/patient/list";
+        return "redirect:/patients/list";
     }
 
-    @GetMapping("/patient/set/{id}")
+    @GetMapping(value = "/patients/set/{id}")
     public String setPatient(@PathVariable("id") int id, Model model) {
-        model.addAttribute("patient", mediscreenPatientClient.getPatient(id));
+        model.addAttribute("patient", mediscreenPatientClient.getPatientById(id));
         return "setPatient";
     }
 
-    @PostMapping("/patient/setting")
-    public String settingPatient(Patient patient, BindingResult result) {
+    @PostMapping(value = "/patients/setting/{id}")
+    public String settingPatient(@PathVariable("id") Integer id,Patient patient, BindingResult result) {
         if (result.hasErrors()) {
-            return "patient/set";
+            return "setPatient";
         }
+        patient.setPatId(id);
         mediscreenPatientClient.setAPatient(patient);
-        return "redirect:/patient/list";
+        return "redirect:/patients/list";
     }
 
-    @DeleteMapping("/patient/delete/{id}")
+    @DeleteMapping(value = "/patients/delete/{id}")
     public String deletePatient(@PathVariable("id") int id) {
         mediscreenPatientClient.deleteAPatient(id);
-        return "redirect:/patient/list";
+        return "redirect:/patients/list";
     }
 }

@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import java.util.List;
 
 
-@FeignClient(name = "mediscreen_patHistory", url = "localhost:8081")
+@FeignClient(name = "mediscreenPatHistory", url = "localhost:8082")
 public interface MediscreenPatHistoryClient {
 
-    @GetMapping(value = "/patHistorys")
+    @GetMapping(value = "/patHistories")
     List<PatHistory> getpatHistoryList();
 
     @GetMapping(value = "/patHistory/{id}")
@@ -21,5 +21,8 @@ public interface MediscreenPatHistoryClient {
 
     @PostMapping(value = "/patHistory/add")
     void addAPatHistory(@RequestBody PatHistory patHistory);
+
+    @GetMapping(value = "/assess/{id}")
+    String getAssessment(@PathVariable("id") int id);
 
 }
