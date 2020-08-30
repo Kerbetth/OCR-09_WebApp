@@ -2,13 +2,12 @@ package com.medic.mediscreen.controllers;
 
 
 import com.medic.mediscreen.domain.Patient;
-import com.medic.mediscreen.repositories.MediscreenPatientClient;
+import com.medic.mediscreen.client.MediscreenPatientClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 /**
  * -the root of the url give link to login or create an account
@@ -62,9 +61,10 @@ public class PatientControllers {
         return "redirect:/patients/list";
     }
 
-    @DeleteMapping(value = "/patients/delete/{id}")
+    @DeleteMapping(value = "/patients/del/{id}")
     public String deletePatient(@PathVariable("id") int id) {
         mediscreenPatientClient.deleteAPatient(id);
         return "redirect:/patients/list";
     }
+
 }

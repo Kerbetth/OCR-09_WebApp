@@ -1,4 +1,4 @@
-package com.medic.mediscreen.repositories;
+package com.medic.mediscreen.client;
 
 import com.medic.mediscreen.domain.PatHistory;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -13,13 +13,10 @@ import java.util.List;
 @FeignClient(name = "mediscreenPatHistory", url = "localhost:8082")
 public interface MediscreenPatHistoryClient {
 
-    @GetMapping(value = "/patHistories")
-    List<PatHistory> getpatHistoryList();
-
     @GetMapping(value = "/patHistory/{id}")
-    PatHistory getpatHistory(@PathVariable("id") int id);
+    List<PatHistory> getPatHistoryList(@PathVariable("id") int id);
 
-    @PostMapping(value = "/patHistory/add")
+    @PostMapping(value = "/patHistory/add/{patId}")
     void addAPatHistory(@RequestBody PatHistory patHistory);
 
     @GetMapping(value = "/assess/{id}")

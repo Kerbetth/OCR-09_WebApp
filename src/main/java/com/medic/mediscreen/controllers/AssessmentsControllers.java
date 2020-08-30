@@ -1,8 +1,8 @@
 package com.medic.mediscreen.controllers;
 
 
-import com.medic.mediscreen.repositories.MediscreenPatHistoryClient;
-import com.medic.mediscreen.repositories.MediscreenPatientClient;
+import com.medic.mediscreen.client.MediscreenPatHistoryClient;
+import com.medic.mediscreen.client.MediscreenPatientClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

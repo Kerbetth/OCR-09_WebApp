@@ -31,6 +31,7 @@
                 <th>Civility</th>
                 <th>Address</th>
                 <th>Phone</th>
+                <th>Notes</th>
                 <th>Action</th>
             </tr>
             </thead>
@@ -43,6 +44,9 @@
                 <td th:text="${patient.sex}"></td>
                 <td th:text="${patient.address}"></td>
                 <td th:text="${patient.phone}"></td>
+                <td style="width: 15%" class="text-center">
+                    <a th:href="@{/patients/patHistory/{id}/list(id=${patient.patId})}">See notes</a>
+                </td>
                 <td style="width: 15%" class="text-center">
                     <a th:href="@{/patients/set/{id}(id=${patient.patId})}">Edit</a>&nbsp;|&nbsp;
                     <a th:href="@{/patients/del/{id}(id=${patient.patId})}">Delete</a>

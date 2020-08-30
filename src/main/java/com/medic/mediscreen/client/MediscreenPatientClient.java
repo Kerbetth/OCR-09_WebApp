@@ -1,4 +1,4 @@
-package com.medic.mediscreen.repositories;
+package com.medic.mediscreen.client;
 
 import com.medic.mediscreen.domain.Patient;
 import org.springframework.cloud.openfeign.FeignClient;
