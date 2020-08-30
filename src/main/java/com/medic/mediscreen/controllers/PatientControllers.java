@@ -26,8 +26,8 @@ public class PatientControllers {
         return "patient";
     }
     @GetMapping(value = "/patients/patient/{familyName}")
-    public int getPatientId(@PathVariable("familyName") String familyName) {
-        return mediscreenPatientClient.getIdByFamilyName(familyName);
+    public Patient getPatientByFamilyName(@PathVariable("familyName") String familyName) {
+        return mediscreenPatientClient.getPatientByFamilyName(familyName);
     }
 
     @GetMapping(value = "/patients/add")
@@ -51,17 +51,17 @@ public class PatientControllers {
         return "setPatient";
     }
 
-    @PostMapping(value = "/patients/setting/{id}")
-    public String settingPatient(@PathVariable("id") Integer id,Patient patient, BindingResult result) {
+    @RequestMapping(value = "/patients/setting/{id}")
+    public String settingPatient(@PathVariable("id") Integer id, Patient patient, BindingResult result) {
         if (result.hasErrors()) {
             return "setPatient";
         }
-        patient.setPatId(id);
+        patient.setId(id);
         mediscreenPatientClient.setAPatient(patient);
         return "redirect:/patients/list";
     }
 
-    @DeleteMapping(value = "/patients/del/{id}")
+    @RequestMapping(value = "/patients/del/{id}")
     public String deletePatient(@PathVariable("id") int id) {
         mediscreenPatientClient.deleteAPatient(id);
         return "redirect:/patients/list";

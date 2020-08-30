@@ -17,14 +17,14 @@ public interface MediscreenPatientClient {
     Patient getPatientById(@PathVariable("id") int id);
 
     @GetMapping(value = "/Patient/{familyName}")
-    int getIdByFamilyName(@PathVariable("familyName") String familyName);
+    Patient getPatientByFamilyName(@PathVariable("familyName") String familyName);
 
-    @PostMapping(value = "/Patient/add")
+    @PostMapping(value = "/Patient/add", consumes = "application/json")
     void addAPatient(@RequestBody Patient patient);
 
-    @PutMapping(value = "/Patient/set")
+    @RequestMapping(value = "/Patient/set", consumes = "application/json")
     void setAPatient(@RequestBody Patient patient);
 
-    @DeleteMapping(value = "/Patient/del")
+    @RequestMapping(value = "/Patient/del", consumes = "application/json")
     void deleteAPatient(@RequestParam int patientId);
 }

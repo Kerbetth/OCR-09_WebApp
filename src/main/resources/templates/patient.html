@@ -3,7 +3,7 @@
 <head>
     <title>List of Patient</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <link rel="stylesheet" href="../../css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../../css/bootstrap.min.css" type="text/css"/>
 </head>
 <body>
 <div class="container">
@@ -13,7 +13,8 @@
         </div>
     </div>
 
-    <div class="row"><h2>Patient list</h2></div>
+    <div class="row"><h2>Patient list</h2>
+    </div>
     <div class="row">
         <a href="/patients/add" class="btn btn-primary btn-sm">Add New Patient</a>
         <table class="table table-bordered">
@@ -32,7 +33,7 @@
             </thead>
             <tbody>
             <tr th:each="patient : ${patients}">
-                <td th:text="${patient.patId}"></td>
+                <td th:text="${patient.id}"></td>
                 <td th:text="${patient.family}"></td>
                 <td th:text="${patient.given}"></td>
                 <td th:text="${patient.dob}"></td>
@@ -40,11 +41,11 @@
                 <td th:text="${patient.address}"></td>
                 <td th:text="${patient.phone}"></td>
                 <td style="width: 15%" class="text-center">
-                    <a th:href="@{/patients/patHistory/{id}/list(id=${patient.patId})}">See notes</a>
+                    <a th:href="@{/patients/patHistory/{id}/list(id=${patient.id})}">See notes</a>
                 </td>
                 <td style="width: 15%" class="text-center">
-                    <a th:href="@{/patients/set/{id}(id=${patient.patId})}">Edit</a>&nbsp;|&nbsp;
-                    <a th:href="@{/patients/del/{id}(id=${patient.patId})}">Delete</a>
+                    <a th:href="@{/patients/set/{id}(id=${patient.id})}" method="get">Edit</a>&nbsp;|&nbsp;
+                    <a th:href="@{/patients/del/{id}(id=${patient.id})}" method="del">Delete</a>
 				</td>
             </tr>
             </tbody>

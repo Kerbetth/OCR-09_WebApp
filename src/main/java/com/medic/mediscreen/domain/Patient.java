@@ -4,8 +4,10 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Set;
 import javax.validation.constraints.NotBlank;
@@ -18,14 +20,15 @@ import javax.validation.constraints.NotBlank;
 @EqualsAndHashCode(of = "id")
 public class Patient {
     @Id
-    @GeneratedValue
-    Integer patId;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    Integer id;
     @NotBlank
     String family;
     @NotBlank
     String given;
     @NotBlank
-    Date dob;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    LocalDate dob;
     @NotBlank
     char sex;
     @NotBlank

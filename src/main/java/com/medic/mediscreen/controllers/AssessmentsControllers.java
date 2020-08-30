@@ -1,7 +1,7 @@
 package com.medic.mediscreen.controllers;
 
 
-import com.medic.mediscreen.client.MediscreenPatHistoryClient;
+import com.medic.mediscreen.client.MediscreenAssessmentsClient;
 import com.medic.mediscreen.client.MediscreenPatientClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,18 +17,18 @@ import org.springframework.web.bind.annotation.PathVariable;
 public class AssessmentsControllers {
 
     @Autowired
-    private MediscreenPatHistoryClient mediscreenPatHistoryClient;
-    @Autowired
     private MediscreenPatientClient mediscreenPatientClient;
+    @Autowired
+    private MediscreenAssessmentsClient mediscreenAssessmentsClient;
 
     @GetMapping("/asses/{id}")
     public String assesById(@PathVariable int id) {
-        mediscreenPatHistoryClient.getAssessment(id);
+        mediscreenAssessmentsClient.getAssessment(mediscreenPatientClient.getPatientById(id));
         return "bidList/add";
     }
 
     @GetMapping("/asses/{familyName}")
     public String assesByFamilyName(@PathVariable String familyName) {
-        return mediscreenPatHistoryClient.getAssessment(mediscreenPatientClient.getIdByFamilyName(familyName));
+        return mediscreenAssessmentsClient.getAssessment(mediscreenPatientClient.getPatientByFamilyName(familyName));
     }
 }

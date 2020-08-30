@@ -12,6 +12,6 @@ import java.util.Set;
 public interface MediscreenAssessmentsClient {
 
     @GetMapping(value = "/assess")
-    String assesById(Patient patient);
+    String getAssessment(Patient patient);
 
 }
