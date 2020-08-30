@@ -12,7 +12,6 @@ CONFIGURATION GENERALE
 body {
 
     background-color: white;
-    margin: 0px;
     color: black;
 }
 
@@ -42,6 +41,15 @@ header {
     margin-right: auto;
     width: 93%;
     margin-bottom: 100px;
+}
+.home {
+    max-width: 1200px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 93%;
+    margin-bottom: 100px;
+    text-align: center;
 }
 .transactionTable{
 border-color: black;
@@ -77,6 +85,12 @@ td{
     justify-content: space-between;
     background-color: white;
 
+}
+
+img {
+text-align : center;
+    display: block;
+    margin: 0 auto;
 }
 
 .buttonAdd {
@@ -164,7 +178,8 @@ a:hover {
 h1 {
 
     font-family: Lucida Console, serif;
-    font-size: 230%;
+    font-size: 400%;
+    text-align: center;
     color: rgb(250, 230, 200);
 }
 

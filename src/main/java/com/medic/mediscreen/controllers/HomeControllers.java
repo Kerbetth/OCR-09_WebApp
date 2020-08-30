@@ -15,7 +15,7 @@ public class HomeControllers {
 
     @RequestMapping(value = "/")
     public String getLog(Model model) {
-        return "LogPage";
+        return "HomePage";
     }
 
 }

@@ -1,4 +1,4 @@
-package com.medic.mediscreen.client;
+package com.medic.mediscreen.repository;
 
 import com.medic.mediscreen.domain.Patient;
 import org.springframework.data.repository.CrudRepository;
