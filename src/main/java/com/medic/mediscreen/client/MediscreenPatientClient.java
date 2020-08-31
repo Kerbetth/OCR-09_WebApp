@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 
-@FeignClient(name = "mediscreenPatient", url = "localhost:8081")
+@FeignClient(name = "mediscreenPatient", url = "localhost:8081", primary = false)
 public interface MediscreenPatientClient {
 
     @GetMapping(value = "/Patients")

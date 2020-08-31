@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import java.util.Set;
 
 
-@FeignClient(name = "mediscreenAssessment", url = "localhost:8083")
+@FeignClient(name = "mediscreenAssessment", url = "localhost:8083", primary = false)
 public interface MediscreenAssessmentsClient {
 
     @GetMapping(value = "/assess")
