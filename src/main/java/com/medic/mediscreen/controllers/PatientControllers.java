@@ -25,11 +25,11 @@ public class PatientControllers {
         model.addAttribute("patients", mediscreenPatientClient.getPatientList());
         return "patient";
     }
-    /*
+
     @GetMapping(value = "/patients/patient/{familyName}")
     public Patient getPatientByFamilyName(@PathVariable("familyName") String familyName) {
         return mediscreenPatientClient.getPatientByFamilyName(familyName);
-    }*/
+    }
 
     @GetMapping(value = "/patients/add")
     public String addPatient( Model model) {

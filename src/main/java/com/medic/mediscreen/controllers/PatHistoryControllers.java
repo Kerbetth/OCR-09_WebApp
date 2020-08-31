@@ -1,6 +1,7 @@
 package com.medic.mediscreen.controllers;
 
 
+import com.medic.mediscreen.client.MediscreenAssessmentsClient;
 import com.medic.mediscreen.domain.PatHistory;
 import com.medic.mediscreen.client.MediscreenPatHistoryClient;
 import com.medic.mediscreen.client.MediscreenPatientClient;
@@ -24,6 +25,8 @@ public class PatHistoryControllers {
     private MediscreenPatHistoryClient mediscreenPatHistoryClient;
     @Autowired
     private MediscreenPatientClient mediscreenPatientClient;
+    @Autowired
+    private MediscreenAssessmentsClient mediscreenAssessmentsClient;
 
     @GetMapping(value = "/patients/patHistory/{id}/list")
     public String getHistories(@PathVariable("id") int id, Model model) {
