@@ -3,7 +3,7 @@ package com.medic.mediscreen;
 import com.medic.mediscreen.client.MediscreenAssessmentsClient;
 import com.medic.mediscreen.client.MediscreenPatientClient;
 import com.medic.mediscreen.dto.CreatePatHistory;
-import com.medic.mediscreen.dto.CreatePatient;
+import com.medic.mediscreen.dto.Patient;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,7 +55,7 @@ public class AssessmentControllerIT {
     @Test
     public void addPatHistoryForm() throws Exception {
         when(mediscreenAssessmentsClient.getAssessment(any())).thenReturn("a response");
-        when(mediscreenPatientClient.getPatientByFamilyName(anyString())).thenReturn(new CreatePatient());
+        when(mediscreenPatientClient.getPatientByFamilyName(anyString())).thenReturn(new Patient());
         mockMvc.perform(get("/asses/familyName")
                 .contentType(MediaType.APPLICATION_JSON)
                 .param("familyName", "aName")

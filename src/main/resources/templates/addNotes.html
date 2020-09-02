@@ -19,7 +19,7 @@
                 <label class="col-sm-2 control-label">Note:</label>
                 <div class="col-sm-10">
 
-                    <textarea type="text" th:field="*{note}" id="note" placeholder="new note for the createPatient" class="col-4" style="width: 400px;height:200px"> id = "myTextArea"
+                    <textarea type="text" th:field="*{note}" id="note" placeholder="new note for the patient" class="col-4" style="width: 400px;height:200px"> id = "myTextArea"
                   <p class="text-danger" th:if="${#fields.hasErrors('note')}" th:errors="*{note}"></p></textarea>
 
                 </div>
@@ -27,7 +27,7 @@
 
             <div class="form-group">
                 <div class="col-sm-12">
-                    <a class="btn btn-danger btn-sm" href="/createPatient/list">Cancel</a>
+                    <a class="btn btn-danger btn-sm" href="/patient/list">Cancel</a>
                     <input class="btn btn-primary btn-sm" type="submit" value="Add bidList">
                 </div>
             </div>

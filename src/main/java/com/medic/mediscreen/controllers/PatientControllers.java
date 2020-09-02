@@ -1,7 +1,7 @@
 package com.medic.mediscreen.controllers;
 
 
-import com.medic.mediscreen.dto.CreatePatient;
+import com.medic.mediscreen.dto.Patient;
 import com.medic.mediscreen.client.MediscreenPatientClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,22 +27,22 @@ public class PatientControllers {
     }
 
     @GetMapping(value = "/patients/patient/{familyName}")
-    public CreatePatient getPatientByFamilyName(@PathVariable("familyName") String familyName) {
+    public Patient getPatientByFamilyName(@PathVariable("familyName") String familyName) {
         return mediscreenPatientClient.getPatientByFamilyName(familyName);
     }
 
     @GetMapping(value = "/patients/add")
     public String addPatient( Model model) {
-        model.addAttribute("patient", new CreatePatient());
+        model.addAttribute("createPatient", new Patient());
         return "addPatient";
     }
 
     @PostMapping(value = "/patients/adding")
-    public String validate(CreatePatient createPatient, BindingResult result) {
+    public String validate(Patient patient, BindingResult result) {
         if (result.hasErrors()) {
             return "addPatient";
         }
-        mediscreenPatientClient.addAPatient(createPatient);
+        mediscreenPatientClient.addAPatient(patient);
         return "redirect:/patients/list";
     }
 
@@ -53,12 +53,11 @@ public class PatientControllers {
     }
 
     @RequestMapping(value = "/patients/setting/{id}")
-    public String settingPatient(@PathVariable("id") Integer id, CreatePatient createPatient, BindingResult result) {
+    public String settingPatient(@PathVariable("id") Patient patient, BindingResult result) {
         if (result.hasErrors()) {
             return "setPatient";
         }
-        createPatient.setId(id);
-        mediscreenPatientClient.setAPatient(createPatient);
+        mediscreenPatientClient.setAPatient(patient);
         return "redirect:/patients/list";
     }
 

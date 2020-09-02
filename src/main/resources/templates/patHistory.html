@@ -16,7 +16,7 @@
     <div class="row"><h2>Patient history</h2>
     </div>
     <div class="row">
-        <a href="/patients/list" class="btn btn-primary btn-sm">Back to the createPatient list</a>
+        <a href="/patients/list" class="btn btn-primary btn-sm">Back to the patient list</a>
         <a href="add" class="btn btn-primary btn-sm">add a note</a>
         <table class="table table-bordered">
             <thead>
@@ -26,9 +26,8 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="patHistory : ${patHistories}">
-                <td th:text="${patHistory.id}"></td>
-                <td th:text="${patHistory.note}"></td>
+            <tr th:each="note : ${notes}">
+                <td th:text="${note}"></td>
             </tr>
             </tbody>
         </table>

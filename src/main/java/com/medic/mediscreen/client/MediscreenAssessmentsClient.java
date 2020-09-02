@@ -1,6 +1,6 @@
 package com.medic.mediscreen.client;
 
-import com.medic.mediscreen.dto.CreatePatient;
+import com.medic.mediscreen.dto.Patient;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -9,6 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 public interface MediscreenAssessmentsClient {
 
     @GetMapping(value = "/assess")
-    String getAssessment(CreatePatient createPatient);
+    String getAssessment(Patient patient);
 
 }

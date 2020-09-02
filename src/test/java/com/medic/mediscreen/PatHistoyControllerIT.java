@@ -1,7 +1,7 @@
 package com.medic.mediscreen;
 
 import com.medic.mediscreen.client.MediscreenPatientClient;
-import com.medic.mediscreen.dto.CreatePatient;
+import com.medic.mediscreen.dto.Patient;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,16 +32,16 @@ public class PatHistoyControllerIT {
 	@Autowired
 	MockMvc mockMvc;
 
-    CreatePatient createPatient = new CreatePatient();
+    Patient patient = new Patient();
 
     @BeforeEach
     void setup() {
-	createPatient.setAddress("anAddress");
-	createPatient.setDob(LocalDate.EPOCH);
-	createPatient.setFamily("AFamilyName");
-	createPatient.setGiven("AGivenName");
-	createPatient.setPhone("000");
-	createPatient.setSex('M');
+	patient.setAddress("anAddress");
+	patient.setDob(LocalDate.EPOCH);
+	patient.setFamily("AFamilyName");
+	patient.setGiven("AGivenName");
+	patient.setPhone("000");
+	patient.setSex('M');
     }
 
     @Test
@@ -62,18 +62,18 @@ public class PatHistoyControllerIT {
 	public void addingAPatient() throws Exception {
 		mockMvc.perform(post("/patients/adding")
 				.contentType(MediaType.APPLICATION_FORM_URLENCODED)
-				.param("address", createPatient.getAddress())
-				.param("family", createPatient.getFamily())
-				.param("given", createPatient.getGiven())
-				.param("phone", createPatient.getPhone())
-				.requestAttr("patient", createPatient)
+				.param("address", patient.getAddress())
+				.param("family", patient.getFamily())
+				.param("given", patient.getGiven())
+				.param("phone", patient.getPhone())
+				.requestAttr("patient", patient)
 		)
 				.andExpect(status().is3xxRedirection());
 	}
 
 	@Test
 	public void setAPatientForm() throws Exception {
-		when(mediscreenPatientClient.getPatientById(1)).thenReturn(createPatient);
+		when(mediscreenPatientClient.getPatientById(1)).thenReturn(patient);
 		mockMvc.perform(get("/patients/set/1")
 		)
 				.andExpect(status().isOk());
@@ -81,14 +81,14 @@ public class PatHistoyControllerIT {
 
 	@Test
 	public void settingAPatient() throws Exception {
-		when(mediscreenPatientClient.getPatientById(1)).thenReturn(createPatient);
+		when(mediscreenPatientClient.getPatientById(1)).thenReturn(patient);
 		mockMvc.perform(get("/patients/setting/1")
 				.contentType(MediaType.APPLICATION_FORM_URLENCODED)
-				.param("address", createPatient.getAddress())
-				.param("family", createPatient.getFamily())
-				.param("given", createPatient.getGiven())
-				.param("phone", createPatient.getPhone())
-				.requestAttr("patient", createPatient)
+				.param("address", patient.getAddress())
+				.param("family", patient.getFamily())
+				.param("given", patient.getGiven())
+				.param("phone", patient.getPhone())
+				.requestAttr("patient", patient)
 		)
 				.andExpect(status().is3xxRedirection());
 	}

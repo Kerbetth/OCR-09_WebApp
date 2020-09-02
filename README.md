@@ -7,9 +7,9 @@
 
 ## What is it
 This application is a service offering the possiblity for a user to:
- 1. get information of a createPatient recorded in the database according to his familyName (and CRUD operation)
- 2. get all medical history about a createPatient cumulated in a list PatList
- 3. get the level of seriousness about the health of the createPatient according to notes present in the Patient History (4 level : None, Borderlin, In Danger, Early onset)
+ 1. get information of a patient recorded in the database according to his familyName (and CRUD operation)
+ 2. get all medical history about a patient cumulated in a list PatList
+ 3. get the level of seriousness about the health of the patient according to notes present in the Patient History (4 level : None, Borderlin, In Danger, Early onset)
 
 ## Database
 1. A database is create automatically with dataJPA, A schema has to be created before in MySql with the name mediscreen

@@ -12,7 +12,7 @@ import javax.validation.constraints.NotBlank;
 @Getter
 @Setter
 @NoArgsConstructor
-public class CreatePatient {
+public class Patient {
 
     @NotBlank
     Integer id;
@@ -26,7 +26,6 @@ public class CreatePatient {
     LocalDate dob;
     @NotBlank
     char sex;
-    @NotBlank
     String address;
     String phone;
 }
