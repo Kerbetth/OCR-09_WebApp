@@ -13,7 +13,7 @@
     </div>
 
     <div class="row">
-        <form action="#" th:action="@{/patients/adding}" th:object="${patient}" method="post" class="form-horizontal"
+        <form action="#" th:action="@{/patients/adding}" th:object="${createPatient}" method="post" class="form-horizontal"
               style="width: 100%">
             <div class="form-group">
                 <label class="col-sm-2 control-label">Family name:</label>
@@ -63,7 +63,7 @@
 
             <div class="form-group">
                 <div class="col-sm-12">
-                    <a class="btn btn-danger btn-sm" href="/patient/list">Cancel</a>
+                    <a class="btn btn-danger btn-sm" href="/createPatient/list">Cancel</a>
                     <input class="btn btn-primary btn-sm" type="submit" value="Add bidList">
                 </div>
             </div>

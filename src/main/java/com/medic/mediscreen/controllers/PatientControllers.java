@@ -1,7 +1,7 @@
 package com.medic.mediscreen.controllers;
 
 
-import com.medic.mediscreen.domain.Patient;
+import com.medic.mediscreen.dto.CreatePatient;
 import com.medic.mediscreen.client.MediscreenPatientClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,22 +27,22 @@ public class PatientControllers {
     }
 
     @GetMapping(value = "/patients/patient/{familyName}")
-    public Patient getPatientByFamilyName(@PathVariable("familyName") String familyName) {
+    public CreatePatient getPatientByFamilyName(@PathVariable("familyName") String familyName) {
         return mediscreenPatientClient.getPatientByFamilyName(familyName);
     }
 
     @GetMapping(value = "/patients/add")
     public String addPatient( Model model) {
-        model.addAttribute("patient", new Patient());
+        model.addAttribute("patient", new CreatePatient());
         return "addPatient";
     }
 
     @PostMapping(value = "/patients/adding")
-    public String validate(Patient patient, BindingResult result) {
+    public String validate(CreatePatient createPatient, BindingResult result) {
         if (result.hasErrors()) {
             return "addPatient";
         }
-        mediscreenPatientClient.addAPatient(patient);
+        mediscreenPatientClient.addAPatient(createPatient);
         return "redirect:/patients/list";
     }
 
@@ -53,12 +53,12 @@ public class PatientControllers {
     }
 
     @RequestMapping(value = "/patients/setting/{id}")
-    public String settingPatient(@PathVariable("id") Integer id, Patient patient, BindingResult result) {
+    public String settingPatient(@PathVariable("id") Integer id, CreatePatient createPatient, BindingResult result) {
         if (result.hasErrors()) {
             return "setPatient";
         }
-        patient.setId(id);
-        mediscreenPatientClient.setAPatient(patient);
+        createPatient.setId(id);
+        mediscreenPatientClient.setAPatient(createPatient);
         return "redirect:/patients/list";
     }
 

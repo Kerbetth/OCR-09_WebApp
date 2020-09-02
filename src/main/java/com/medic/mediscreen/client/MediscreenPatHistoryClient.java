@@ -1,7 +1,6 @@
 package com.medic.mediscreen.client;
 
-import com.medic.mediscreen.domain.PatHistory;
-import com.medic.mediscreen.domain.Patient;
+import com.medic.mediscreen.dto.CreatePatHistory;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,9 +11,9 @@ import java.util.List;
 public interface MediscreenPatHistoryClient {
 
     @GetMapping(value = "/patHistory")
-    List<PatHistory> getPatHistoryList(@RequestParam int id);
+    List<CreatePatHistory> getPatHistoryList(@RequestParam int id);
 
     @PostMapping(value = "/patHistory/add")
-    void addAPatHistory(@RequestParam int id, @RequestBody PatHistory patHistory);
+    void addAPatHistory(@RequestParam int id, @RequestBody CreatePatHistory patHistory);
 
 }

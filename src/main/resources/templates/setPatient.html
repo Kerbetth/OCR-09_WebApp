@@ -12,7 +12,7 @@
     </div>
 
     <div class="row">
-        <form action="#" th:action="@{/patients/setting/{id}(id=${patient.id})}" th:object="${patient}"
+        <form action="#" th:action="@{/patients/setting/{id}(id=${createPatient.id})}" th:object="${createPatient}"
               method="put" class="form-horizontal" style="width: 100%">
 
             <div class="form-group">

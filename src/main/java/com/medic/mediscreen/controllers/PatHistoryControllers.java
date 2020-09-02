@@ -2,7 +2,7 @@ package com.medic.mediscreen.controllers;
 
 
 import com.medic.mediscreen.client.MediscreenAssessmentsClient;
-import com.medic.mediscreen.domain.PatHistory;
+import com.medic.mediscreen.dto.CreatePatHistory;
 import com.medic.mediscreen.client.MediscreenPatHistoryClient;
 import com.medic.mediscreen.client.MediscreenPatientClient;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,12 +36,12 @@ public class PatHistoryControllers {
 
     @GetMapping(value = "/patients/patHistory/{id}/add")
     public String addHistories(@PathVariable("id") int id, Model model) {
-        model.addAttribute("patHistory", new PatHistory());
+        model.addAttribute("patHistory", new CreatePatHistory());
         return "addNotes";
     }
 
     @PostMapping(value = "/patients/patHistory/{id}/adding")
-    public String addingHistories(@PathVariable("id") int id, PatHistory patHistory) {
+    public String addingHistories(@PathVariable("id") int id, CreatePatHistory patHistory) {
         mediscreenPatHistoryClient.addAPatHistory(id, patHistory);
         return "redirect:/patients/patHistory/"+id+"/list";
     }

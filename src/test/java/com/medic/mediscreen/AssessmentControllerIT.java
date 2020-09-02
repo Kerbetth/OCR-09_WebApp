@@ -1,10 +1,9 @@
 package com.medic.mediscreen;
 
 import com.medic.mediscreen.client.MediscreenAssessmentsClient;
-import com.medic.mediscreen.client.MediscreenPatHistoryClient;
 import com.medic.mediscreen.client.MediscreenPatientClient;
-import com.medic.mediscreen.domain.PatHistory;
-import com.medic.mediscreen.domain.Patient;
+import com.medic.mediscreen.dto.CreatePatHistory;
+import com.medic.mediscreen.dto.CreatePatient;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,11 +13,11 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
@@ -35,12 +34,11 @@ public class AssessmentControllerIT {
 	@Autowired
 	MockMvc mockMvc;
 
-    PatHistory patHistory = new PatHistory();
+    CreatePatHistory patHistory = new CreatePatHistory();
 
     @BeforeEach
     void setup() {
 	patHistory.setId(1);
-	patHistory.setPatient(new Patient());
 	patHistory.setNote("a note");
     }
 
@@ -57,7 +55,7 @@ public class AssessmentControllerIT {
     @Test
     public void addPatHistoryForm() throws Exception {
         when(mediscreenAssessmentsClient.getAssessment(any())).thenReturn("a response");
-        when(mediscreenPatientClient.getPatientByFamilyName(anyString())).thenReturn(new Patient());
+        when(mediscreenPatientClient.getPatientByFamilyName(anyString())).thenReturn(new CreatePatient());
         mockMvc.perform(get("/asses/familyName")
                 .contentType(MediaType.APPLICATION_JSON)
                 .param("familyName", "aName")

@@ -1,6 +1,6 @@
 package com.medic.mediscreen.client;
 
-import com.medic.mediscreen.domain.Patient;
+import com.medic.mediscreen.dto.CreatePatient;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,19 +11,19 @@ import java.util.List;
 public interface MediscreenPatientClient {
 
     @GetMapping(value = "/Patients")
-    List<Patient> getPatientList();
+    List<CreatePatient> getPatientList();
 
-    @GetMapping(value = "/Patient/{id}")
-    Patient getPatientById(@PathVariable("id") int id);
+    @GetMapping(value = "/Patient/id")
+    CreatePatient getPatientById(@RequestParam int id);
 
-    @GetMapping(value = "/Patient/{familyName}")
-    Patient getPatientByFamilyName(@PathVariable("familyName") String familyName);
+    @GetMapping(value = "/Patient/familyName")
+    CreatePatient getPatientByFamilyName(@RequestParam String familyName);
 
     @PostMapping(value = "/Patient/add", consumes = "application/json")
-    void addAPatient(@RequestBody Patient patient);
+    void addAPatient(@RequestBody CreatePatient createPatient);
 
     @RequestMapping(value = "/Patient/set", consumes = "application/json")
-    void setAPatient(@RequestBody Patient patient);
+    void setAPatient(@RequestBody CreatePatient createPatient);
 
     @RequestMapping(value = "/Patient/del", consumes = "application/json")
     void deleteAPatient(@RequestParam int patientId);
