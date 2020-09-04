@@ -33,7 +33,7 @@ public class PatientControllers {
 
     @GetMapping(value = "/patients/add")
     public String addPatient( Model model) {
-        model.addAttribute("createPatient", new Patient());
+        model.addAttribute("patient", new Patient());
         return "addPatient";
     }
 
@@ -53,10 +53,11 @@ public class PatientControllers {
     }
 
     @RequestMapping(value = "/patients/setting/{id}")
-    public String settingPatient(@PathVariable("id") Patient patient, BindingResult result) {
+    public String settingPatient(@PathVariable("id") int id, Patient patient, BindingResult result) {
         if (result.hasErrors()) {
             return "setPatient";
         }
+        patient.setId(id);
         mediscreenPatientClient.setAPatient(patient);
         return "redirect:/patients/list";
     }

@@ -4,6 +4,9 @@ import com.medic.mediscreen.client.MediscreenPatientClient;
 import com.medic.mediscreen.dto.Patient;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentMatchers;
+import org.mockito.Matchers;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -81,7 +84,8 @@ public class PatHistoyControllerIT {
 
 	@Test
 	public void settingAPatient() throws Exception {
-		when(mediscreenPatientClient.getPatientById(1)).thenReturn(patient);
+		Mockito.doNothing().when(mediscreenPatientClient).setAPatient(
+				ArgumentMatchers.any(Patient.class));
 		mockMvc.perform(get("/patients/setting/1")
 				.contentType(MediaType.APPLICATION_FORM_URLENCODED)
 				.param("address", patient.getAddress())
