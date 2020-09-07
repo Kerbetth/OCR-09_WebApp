@@ -27,6 +27,7 @@
                 <th>Address</th>
                 <th>Phone</th>
                 <th>Notes</th>
+                <th>Assessment</th>
                 <th>Action</th>
             </tr>
             </thead>
@@ -40,6 +41,9 @@
                 <td th:text="${patient.phone}"></td>
                 <td style="width: 15%" class="text-center">
                     <a th:href="@{/patients/patHistory/{id}/list(id=${patient.id})}">See notes</a>
+                </td>
+                <td style="width: 15%" class="text-center">
+                    <a th:href="@{/assess/id?id={id}(id=${patient.id})}">See assessment</a>
                 </td>
                 <td style="width: 15%" class="text-center">
                     <a th:href="@{/patients/set/{id}(id=${patient.id})}" method="get">Edit</a>&nbsp;|&nbsp;

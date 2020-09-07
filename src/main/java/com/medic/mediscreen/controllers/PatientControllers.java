@@ -9,6 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 /**
  * -the root of the url give link to login or create an account
  * -userHome url is the main page of connected users
@@ -38,7 +40,7 @@ public class PatientControllers {
     }
 
     @PostMapping(value = "/patients/adding")
-    public String validate(Patient patient, BindingResult result) {
+    public String validate(@Valid Patient patient, BindingResult result) {
         if (result.hasErrors()) {
             return "addPatient";
         }
@@ -53,7 +55,7 @@ public class PatientControllers {
     }
 
     @RequestMapping(value = "/patients/setting/{id}")
-    public String settingPatient(@PathVariable("id") int id, Patient patient, BindingResult result) {
+    public String settingPatient(@PathVariable("id") int id, @Valid Patient patient, BindingResult result) {
         if (result.hasErrors()) {
             return "setPatient";
         }

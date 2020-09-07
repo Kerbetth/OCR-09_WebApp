@@ -68,7 +68,8 @@ public class PatHistoyControllerIT {
 				.param("address", patient.getAddress())
 				.param("family", patient.getFamily())
 				.param("given", patient.getGiven())
-				.param("phone", patient.getPhone())
+				.param("dob", "2000-02-02")
+				.param("sex", "F")
 				.requestAttr("patient", patient)
 		)
 				.andExpect(status().is3xxRedirection());
@@ -92,7 +93,7 @@ public class PatHistoyControllerIT {
 				.param("family", patient.getFamily())
 				.param("given", patient.getGiven())
 				.param("phone", patient.getPhone())
-				.requestAttr("patient", patient)
+				.param("dob", "2000-02-02")
 		)
 				.andExpect(status().is3xxRedirection());
 	}

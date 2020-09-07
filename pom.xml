@@ -10,8 +10,8 @@
     </parent>
 
     <groupId>com.medic</groupId>
-    <artifactId>mediscreen</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <artifactId>mediscreen_webapp</artifactId>
+    <version>1</version>
     <name>mediscreen</name>
     <description>application for medical purposes</description>
 
@@ -40,6 +40,10 @@
             </exclusions>
         </dependency>
         <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>1.18.10</version>
@@ -55,12 +59,6 @@
             <groupId>org.webjars</groupId>
             <artifactId>bootstrap</artifactId>
             <version>3.3.5</version>
-        </dependency>
-
-        <dependency>
-            <groupId>javax.validation</groupId>
-            <artifactId>validation-api</artifactId>
-            <version>2.0.1.Final</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
