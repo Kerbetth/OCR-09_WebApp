@@ -23,11 +23,17 @@
             <tr>
                 <th>Id</th>
                 <th>List of notes</th>
+                <th>Action</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="note : ${notes}">
-                <td th:text="${note}"></td>
+            <tr th:each="patHistory : ${patHistories}">
+                <td th:text="${patHistory.id}"></td>
+                <td th:text="${patHistory.note}"></td>
+                <td style="width: 15%" class="text-center">
+                    <a th:href="@{/patients/patHistory/{id}/set/{noteId}?note={note}(id=${patHistory.patId},note=${patHistory.note},noteId=${patHistory.id})}" method="get">Edit</a>&nbsp;|&nbsp;
+                    <a th:href="@{/patients/patHistory/{id}/del/{noteId}(id=${patHistory.patId},noteId=${patHistory.id})}" method="del">Delete</a>
+                </td>
             </tr>
             </tbody>
         </table>
