@@ -18,7 +18,7 @@ This application is a service offering the possiblity for a user to:
 1. The application is divided in four microservices, three for the three task define previously, plus a microservice which manage each request according to the enpoints send by the client.
 
 ## Implement a Feature
-1. Create mapping domain class and place in package com.medic.mediscreen.domain
+1. Create mapping domain class and place in package com.medic.mediscreen.dto
 2. Create repository class and place in package com.medic.mediscreen.client
 3. Create controller class and place in package com.medic.mediscreen.controllers
 4. Create view files and place in src/main/resource/templates

@@ -9,22 +9,17 @@
 <div class="container">
     <div class="row">
         <div class="col-6">
-            <a href="/patients/list">Bid List</a>&nbsp;|&nbsp;
+            <a href="/">Back to homepage</a>&nbsp;|&nbsp;
         </div>
     </div>
-    <div class="col-6 text-right">
-        Logged in user: <b th:inline="text" class="user"> [[${#httpServletRequest.remoteUser}]] </b>
-        <form th:action="@{/app-logout}" method="POST">
-            <input type="submit" value="Logout"/>
-        </form>
+
+    <div class="row"><h2>Patient list</h2>
     </div>
-    <div class="row"><h2>Patient</h2></div>
     <div class="row">
         <a href="/patients/add" class="btn btn-primary btn-sm">Add New Patient</a>
         <table class="table table-bordered">
             <thead>
             <tr>
-                <th>Id</th>
                 <th>Family name</th>
                 <th>Given name</th>
                 <th>Date of Birth</th>
@@ -32,12 +27,12 @@
                 <th>Address</th>
                 <th>Phone</th>
                 <th>Notes</th>
+                <th>Assessment</th>
                 <th>Action</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="patient : ${patients}">
-                <td th:text="${patient.patId}"></td>
                 <td th:text="${patient.family}"></td>
                 <td th:text="${patient.given}"></td>
                 <td th:text="${patient.dob}"></td>
@@ -45,11 +40,14 @@
                 <td th:text="${patient.address}"></td>
                 <td th:text="${patient.phone}"></td>
                 <td style="width: 15%" class="text-center">
-                    <a th:href="@{/patients/patHistory/{id}/list(id=${patient.patId})}">See notes</a>
+                    <a th:href="@{/patients/patHistory/{id}/list(id=${patient.id})}">See notes</a>
                 </td>
                 <td style="width: 15%" class="text-center">
-                    <a th:href="@{/patients/set/{id}(id=${patient.patId})}">Edit</a>&nbsp;|&nbsp;
-                    <a th:href="@{/patients/del/{id}(id=${patient.patId})}">Delete</a>
+                    <a th:href="@{/assess/id?id={id}(id=${patient.id})}">See assessment</a>
+                </td>
+                <td style="width: 15%" class="text-center">
+                    <a th:href="@{/patients/set/{id}(id=${patient.id})}" method="get">Edit</a>&nbsp;|&nbsp;
+                    <a th:href="@{/patients/del/{id}(id=${patient.id})}" method="del">Delete</a>
 				</td>
             </tr>
             </tbody>

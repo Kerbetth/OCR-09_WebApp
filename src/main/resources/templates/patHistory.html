@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>List of Patient</title>
+    <title>List of Notes</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="stylesheet" href="../../css/bootstrap.min.css" />
 </head>
@@ -9,28 +9,25 @@
 <div class="container">
     <div class="row">
         <div class="col-6">
-            <a href="/patients/list">Patient List</a>&nbsp;|&nbsp;
+            <a href="/patients/list">Return to the Patient List</a>&nbsp;|&nbsp;
         </div>
     </div>
-    <div class="col-6 text-right">
-        Logged in user: <b th:inline="text" class="user"> [[${#httpServletRequest.remoteUser}]] </b>
-        <form th:action="@{/app-logout}" method="POST">
-            <input type="submit" value="Logout"/>
-        </form>
+
+    <div class="row"><h2>Patient history</h2>
     </div>
-    <div class="row"><h2>Patient history</h2></div>
     <div class="row">
         <a href="/patients/list" class="btn btn-primary btn-sm">Back to the patient list</a>
         <a href="add" class="btn btn-primary btn-sm">add a note</a>
         <table class="table table-bordered">
             <thead>
             <tr>
+                <th>Id</th>
                 <th>List of notes</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="note : ${patHistory}">
-                <td th:text="${patHistory.note}"></td>
+            <tr th:each="note : ${notes}">
+                <td th:text="${note}"></td>
             </tr>
             </tbody>
         </table>

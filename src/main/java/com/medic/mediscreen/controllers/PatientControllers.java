@@ -1,13 +1,15 @@
 package com.medic.mediscreen.controllers;
 
 
-import com.medic.mediscreen.domain.Patient;
+import com.medic.mediscreen.dto.Patient;
 import com.medic.mediscreen.client.MediscreenPatientClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 /**
  * -the root of the url give link to login or create an account
@@ -25,9 +27,10 @@ public class PatientControllers {
         model.addAttribute("patients", mediscreenPatientClient.getPatientList());
         return "patient";
     }
+
     @GetMapping(value = "/patients/patient/{familyName}")
-    public int getPatientId(@PathVariable("familyName") String familyName) {
-        return mediscreenPatientClient.getIdByFamilyName(familyName);
+    public Patient getPatientByFamilyName(@PathVariable("familyName") String familyName) {
+        return mediscreenPatientClient.getPatientByFamilyName(familyName);
     }
 
     @GetMapping(value = "/patients/add")
@@ -37,7 +40,7 @@ public class PatientControllers {
     }
 
     @PostMapping(value = "/patients/adding")
-    public String validate(Patient patient, BindingResult result) {
+    public String validate(@Valid Patient patient, BindingResult result) {
         if (result.hasErrors()) {
             return "addPatient";
         }
@@ -51,17 +54,17 @@ public class PatientControllers {
         return "setPatient";
     }
 
-    @PostMapping(value = "/patients/setting/{id}")
-    public String settingPatient(@PathVariable("id") Integer id,Patient patient, BindingResult result) {
+    @RequestMapping(value = "/patients/setting/{id}")
+    public String settingPatient(@PathVariable("id") int id, @Valid Patient patient, BindingResult result) {
         if (result.hasErrors()) {
             return "setPatient";
         }
-        patient.setPatId(id);
+        patient.setId(id);
         mediscreenPatientClient.setAPatient(patient);
         return "redirect:/patients/list";
     }
 
-    @DeleteMapping(value = "/patients/del/{id}")
+    @RequestMapping(value = "/patients/del/{id}")
     public String deletePatient(@PathVariable("id") int id) {
         mediscreenPatientClient.deleteAPatient(id);
         return "redirect:/patients/list";

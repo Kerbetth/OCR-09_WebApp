@@ -1,7 +1,8 @@
 package com.medic.mediscreen.controllers;
 
 
-import com.medic.mediscreen.domain.PatHistory;
+import com.medic.mediscreen.client.MediscreenAssessmentsClient;
+import com.medic.mediscreen.dto.CreatePatHistory;
 import com.medic.mediscreen.client.MediscreenPatHistoryClient;
 import com.medic.mediscreen.client.MediscreenPatientClient;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,24 +25,25 @@ public class PatHistoryControllers {
     private MediscreenPatHistoryClient mediscreenPatHistoryClient;
     @Autowired
     private MediscreenPatientClient mediscreenPatientClient;
+    @Autowired
+    private MediscreenAssessmentsClient mediscreenAssessmentsClient;
 
     @GetMapping(value = "/patients/patHistory/{id}/list")
     public String getHistories(@PathVariable("id") int id, Model model) {
-        model.addAttribute("patHistory", mediscreenPatHistoryClient.getPatHistoryList(id));
-        ;
+        model.addAttribute("notes", mediscreenPatHistoryClient.getNotes(id));
         return "patHistory";
     }
 
     @GetMapping(value = "/patients/patHistory/{id}/add")
     public String addHistories(@PathVariable("id") int id, Model model) {
-        model.addAttribute("patHistory", new PatHistory());
+        model.addAttribute("patHistory", new CreatePatHistory());
         return "addNotes";
     }
 
     @PostMapping(value = "/patients/patHistory/{id}/adding")
-    public String userPage(@PathVariable("id") int id, PatHistory patHistory) {
-        patHistory.setPatient(mediscreenPatientClient.getPatientById(id));
+    public String addingHistories(@PathVariable("id") int id, CreatePatHistory patHistory) {
+        patHistory.setId(id);
         mediscreenPatHistoryClient.addAPatHistory(patHistory);
-        return "redirect: /patients/patHistory/" + id + "/list";
+        return "redirect:/patients/patHistory/"+id+"/list";
     }
 }
