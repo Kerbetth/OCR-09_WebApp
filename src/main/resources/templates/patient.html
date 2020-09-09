@@ -43,7 +43,9 @@
                     <a class="tableButton" th:href="@{/patients/patHistory/{id}/list(id=${patient.id})}">See notes</a>
                 </td>
                 <td style="width: 15%" class="text-center">
-                    <a class="tableButton" th:href="@{/assess/id?id={id}(id=${patient.id})}">See assessment</a>
+                    <form method="POST" th:action="@{/assess/id?id={id}(id=${patient.id})}">
+                        <button type="submit" name="submit" value="value" class="tableButton">See assessment</button>
+                    </form>
                 </td>
                 <td style="width: 15%" class="text-center">
                     <a class="tableButton" th:href="@{/patients/set/{id}(id=${patient.id})}" >Edit</a>&nbsp;|&nbsp;
