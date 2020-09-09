@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>List of Patient</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" th:href="@{/css/mediscreen.css}"/>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+            <a class="buttonBack" href="/">Back to homepage</a>&nbsp;|&nbsp;
+            <a class="buttonAdd" th:href="@{/patients/add}">Add New Patient</a>
+        </div>
+    </div>
+
+    <div class="row"><h2>Patient list</h2>
+    </div>
+    <div class="row">
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>Family name</th>
+                <th>Given name</th>
+                <th>Date of Birth</th>
+                <th>Civility</th>
+                <th>Address</th>
+                <th>Phone</th>
+                <th>Notes</th>
+                <th>Assessment</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="patient : ${patients}">
+                <td th:text="${patient.family}"></td>
+                <td th:text="${patient.given}"></td>
+                <td th:text="${patient.dob}"></td>
+                <td th:text="${patient.sex}"></td>
+                <td th:text="${patient.address}"></td>
+                <td th:text="${patient.phone}"></td>
+                <td style="width: 15%" class="text-center">
+                    <a class="tableButton" th:href="@{/patients/patHistory/{id}/list(id=${patient.id})}">See notes</a>
+                </td>
+                <td style="width: 15%" class="text-center">
+                    <form method="POST" th:action="@{/assess/id?id={id}(id=${patient.id})}">
+                        <button type="submit" name="submit" value="value" class="tableButton">See assessment</button>
+                    </form>
+                </td>
+                <td style="width: 15%" class="text-center">
+                    <a class="tableButton" th:href="@{/patients/set/{id}(id=${patient.id})}" >Edit</a>&nbsp;|&nbsp;
+                    <a class="tableButton" th:href="@{/patients/del/{id}(id=${patient.id})}" >Delete</a>
+				</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

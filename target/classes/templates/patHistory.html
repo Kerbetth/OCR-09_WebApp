@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>List of Notes</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" th:href="@{/css/mediscreen.css}"/>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+            <a class="buttonBack" href="/patients/list">Return to the Patient List</a>&nbsp;|&nbsp;
+            <a class="buttonAdd" href="add">add a note</a>
+        </div>
+    </div>
+
+    <div class="row"><h2>Patient history</h2>
+    </div>
+    <div class="row">
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>List of notes</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="patHistory : ${patHistories}">
+                <td th:text="${patHistory.id}"></td>
+                <td th:text="${patHistory.note}"></td>
+                <td style="width: 15%" class="text-center">
+                    <a class="tableButton" th:href="@{/patients/patHistory/{id}/set/{noteId}?note={note}(id=${patHistory.patId},note=${patHistory.note},noteId=${patHistory.id})}" >Edit</a>&nbsp;|&nbsp;
+                    <a class="tableButton" th:href="@{/patients/patHistory/{id}/del/{noteId}(id=${patHistory.patId},noteId=${patHistory.id})}" >Delete</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>
