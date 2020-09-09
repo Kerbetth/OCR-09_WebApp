@@ -2,8 +2,8 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Add a Patient</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <link rel="stylesheet" th:href="@{static/css/bootstrap.min.css}" />
+    <meta charset="utf-8" />
+    <link rel="stylesheet" th:href="@{/css/mediscreen.css}"/>
 </head>
 <body>
 <div class="container">
@@ -63,13 +63,12 @@
 
             <div class="form-group">
                 <div class="col-sm-12">
-                    <a class="btn btn-danger btn-sm" href="/patient/list">Cancel</a>
-                    <input class="btn btn-primary btn-sm" type="submit" value="Add bidList">
+                    <a class="buttonBack" href="/patient/list">Cancel</a>
+                    <input class="buttonAdd" type="submit" value="Add Patient">
                 </div>
             </div>
         </form>
     </div>
-
 </div>
 </body>
 </html>

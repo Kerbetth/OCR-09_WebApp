@@ -12,8 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.time.format.DateTimeFormatter;
 
 /**
- * -the root of the url give link to login or create an account
- * -userHome url is the main page of connected users
+ * -AssessmentsControllers are the endpoint sending request to the assessment service
  */
 
 @RestController

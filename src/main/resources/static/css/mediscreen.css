@@ -12,6 +12,7 @@ CONFIGURATION GENERALE
 body {
 
     background-color: white;
+    margin: 0px;
     color: black;
 }
 
@@ -35,29 +36,17 @@ header {
     padding: 10px 30px;
 }
 .container {
-    max-width: 1200px;
+    max-width: 1600px;
     display: block;
     margin-left: auto;
     margin-right: auto;
     width: 93%;
     margin-bottom: 100px;
-}
-.home {
-    max-width: 1200px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 93%;
-    margin-bottom: 100px;
-    text-align: center;
-}
-.transactionTable{
-border-color: black;
 }
 
 th{
     background-color: #00bc50;
-    padding: 20px;
+    padding: 10px;
     margin: 0px;
     color: white;
     text-align: center;
@@ -66,14 +55,14 @@ th{
 
 tr{
     background-color: white;
-    padding: 20px;
+    padding: 10px;
     margin: 0px;
     color: black;
     text-align: center;
     border-collapse: collapse;
 }
 td{
-    padding: 20px;
+    padding: 10px;
     color: black;
     text-align: center;
     border-collapse: collapse;
@@ -87,37 +76,32 @@ td{
 
 }
 
-img {
-text-align : center;
-    display: block;
-    margin: 0 auto;
-}
-
 .buttonAdd {
     background-color: royalblue;
     font-family: Arial Black, serif;
     color: white;
-    padding: 20px 25px;
-    font-size: 25px;
-    border-radius: 5px;
+    padding: 5px 50px;
+    margin: 20px 20px;
+    font-size: 15px;
+    border-radius: 3px;
 }
 
-.buttonPay {
+.buttonBack {
     background-color: #00bc50;
     font-family: Arial Black, serif;
     color: white;
-    padding: 20px 50px;
-    font-size: 25px;
-    border-radius: 5px;
+    padding: 5px 50px;
+    margin: 20px 20px;
+    font-size: 15px;
+    border-radius: 3px;
 }
 
-.buttonPut {
-    background-color: gray;
-    font-family: Arial Black, serif;
-    color: white;
-    padding: 5px 50px;
-    margin: 5px 20px;
-    font-size: 15px;
+.tableButton {
+    font-size: 80%;
+        background-color: rgb(240,240,240);
+    color: rgb(60,40,40);
+        border-radius: 2px;
+    font-family: Arial, serif;
 }
 
 table {
@@ -140,30 +124,6 @@ table {
     word-spacing: 30px;
 }
 
-div.pager {
-    text-align: left;
-}
-
-div.pager span {
-    display: inline-block;
-    width: 1.8em;
-    height: 1.8em;
-    line-height: 1.8;
-    text-align: center;
-    cursor: pointer;
-    background: #191919;
-    color: #ccc;
-    margin-right: 0.5em;
-}
-
-div.pager span.active {
-    background: #fff;
-    color:#191919;
-    font-weight:bold;
-    text-align:center;
-}
-
-
 
 a {
     text-decoration: none;
@@ -178,8 +138,7 @@ a:hover {
 h1 {
 
     font-family: Lucida Console, serif;
-    font-size: 400%;
-    text-align: center;
+    font-size: 230%;
     color: rgb(250, 230, 200);
 }
 

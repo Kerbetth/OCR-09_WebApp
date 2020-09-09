@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 
-@FeignClient(name = "mediscreenPatHistory", url = "localhost:8082", primary = false)
+@FeignClient(name = "mediscreenPatHistory", url = "${PRACTIONER_URI}", primary = false)
 public interface MediscreenPatHistoryClient {
 
     @GetMapping(value = "/patHistory/getPatHistories")
@@ -20,10 +20,10 @@ public interface MediscreenPatHistoryClient {
     @PostMapping(value = "/patHistory/add")
     void addAPatHistory(@RequestBody PatHistory patHistory);
 
-    @RequestMapping(value = "/patHistory/set", consumes = "application/json")
+    @PutMapping(value = "/patHistory/set", consumes = "application/json")
     void setAPatHistory(@RequestBody PatHistory patHistory);
 
-    @RequestMapping(value = "/patHistory/del", consumes = "application/json")
+    @DeleteMapping(value = "/patHistory/del", consumes = "application/json")
     void deleteAPatHistory(@RequestParam String noteId);
 
 }

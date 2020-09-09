@@ -31,9 +31,6 @@ public class PatHistoryControllers {
     @GetMapping(value = "/patients/patHistory/{id}/list")
     public String getHistories(@PathVariable("id") int id, Model model) {
         model.addAttribute("patHistories", mediscreenPatHistoryClient.getPatHistories(id));
-        for(PatHistory patHistory:mediscreenPatHistoryClient.getPatHistories(id)){
-            System.out.println(patHistory.getId());
-        }
         return "patHistory";
     }
 
@@ -45,6 +42,7 @@ public class PatHistoryControllers {
 
     @PostMapping(value = "/patients/patHistory/{id}/adding")
     public String addingHistories(@PathVariable("id") int id, PatHistory patHistory) {
+        patHistory.setId(null);
         patHistory.setPatId(id);
         mediscreenPatHistoryClient.addAPatHistory(patHistory);
         return "redirect:/patients/patHistory/"+id+"/list";

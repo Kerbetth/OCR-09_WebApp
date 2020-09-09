@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 
-@FeignClient(name = "mediscreenPatient", url = "localhost:8081", primary = false)
+@FeignClient(name = "mediscreenPatient", url = "${PATIENT_URI}", primary = false)
 public interface MediscreenPatientClient {
 
     @GetMapping(value = "/Patients")
@@ -22,9 +22,9 @@ public interface MediscreenPatientClient {
     @PostMapping(value = "/Patient/add", consumes = "application/json")
     void addAPatient(@RequestBody Patient patient);
 
-    @RequestMapping(value = "/Patient/set", consumes = "application/json")
+    @PutMapping(value = "/Patient/set", consumes = "application/json")
     void setAPatient(@RequestBody Patient patient);
 
-    @RequestMapping(value = "/Patient/del", consumes = "application/json")
+    @DeleteMapping(value = "/Patient/del", consumes = "application/json")
     void deleteAPatient(@RequestParam int patientId);
 }
