@@ -16,6 +16,7 @@ This application is a service offering the possiblity for a user to:
 
 ## MicroService architecture
 1. The application is divided in four microservices, three for the three task define previously, plus a microservice which manage each request according to the enpoints send by the client.
+2. A docker architecture has been build with dockerfile for each services, and a docker-Compose
 
 ## Implement a Feature
 1. Create mapping domain class and place in package com.medic.mediscreen.dto

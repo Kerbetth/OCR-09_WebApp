@@ -25,7 +25,7 @@ public class AssessmentsControllers {
     @Autowired
     private MediscreenAssessmentsClient mediscreenAssessmentsClient;
 
-    @GetMapping("/assess/id")
+    @PostMapping("/assess/id")
     public String assesById(@RequestParam int id) {
         Patient patient = mediscreenPatientClient.getPatientById(id);
         return mediscreenAssessmentsClient.getAssessment(
@@ -36,7 +36,7 @@ public class AssessmentsControllers {
                         mediscreenPatHistoryClient.getNotes(id)));
     }
 
-    @GetMapping("/assess/familyName")
+    @PostMapping("/assess/familyName")
     public String assesByFamilyName(@RequestParam String familyName) {
         Patient patient = mediscreenPatientClient.getPatientByFamilyName(familyName);
         return mediscreenAssessmentsClient.getAssessment(

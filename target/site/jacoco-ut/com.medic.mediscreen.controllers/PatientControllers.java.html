@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PatientControllers.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">mediscreen</a> &gt; <a href="index.source.html" class="el_package">com.medic.mediscreen.controllers</a> &gt; <span class="el_source">PatientControllers.java</span></div><h1>PatientControllers.java</h1><pre class="source lang-java linenums">package com.medic.mediscreen.controllers;
+
+
+import com.medic.mediscreen.dto.Patient;
+import com.medic.mediscreen.client.MediscreenPatientClient;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+
+/**
+ * -All the following endpoints execute CRUD request for the Patient Object
+ */
+
+@Controller
+<span class="fc" id="L19">public class PatientControllers {</span>
+
+    @Autowired
+    private MediscreenPatientClient mediscreenPatientClient;
+
+    @GetMapping(value = &quot;/patients/list&quot;)
+    public String listPatient(Model model) {
+<span class="fc" id="L26">        model.addAttribute(&quot;patients&quot;, mediscreenPatientClient.getPatientList());</span>
+<span class="fc" id="L27">        return &quot;patient&quot;;</span>
+    }
+
+    @GetMapping(value = &quot;/patients/patient/{familyName}&quot;)
+    public Patient getPatientByFamilyName(@PathVariable(&quot;familyName&quot;) String familyName) {
+<span class="nc" id="L32">        return mediscreenPatientClient.getPatientByFamilyName(familyName);</span>
+    }
+
+    @GetMapping(value = &quot;/patients/add&quot;)
+    public String addPatient( Model model) {
+<span class="fc" id="L37">        model.addAttribute(&quot;patient&quot;, new Patient());</span>
+<span class="fc" id="L38">        return &quot;addPatient&quot;;</span>
+    }
+
+    @PostMapping(value = &quot;/patients/adding&quot;)
+    public String validate(@Valid Patient patient, BindingResult result) {
+<span class="pc bpc" id="L43" title="1 of 2 branches missed.">        if (result.hasErrors()) {</span>
+<span class="nc" id="L44">            return &quot;addPatient&quot;;</span>
+        }
+<span class="fc" id="L46">        mediscreenPatientClient.addAPatient(patient);</span>
+<span class="fc" id="L47">        return &quot;redirect:/patients/list&quot;;</span>
+    }
+
+    @GetMapping(value = &quot;/patients/set/{id}&quot;)
+    public String setPatient(@PathVariable(&quot;id&quot;) int id, Model model) {
+<span class="fc" id="L52">        model.addAttribute(&quot;patient&quot;, mediscreenPatientClient.getPatientById(id));</span>
+<span class="fc" id="L53">        return &quot;setPatient&quot;;</span>
+    }
+
+    @RequestMapping(value = &quot;/patients/setting/{id}&quot;)
+    public String settingPatient(@PathVariable(&quot;id&quot;) int id, @Valid Patient patient, BindingResult result) {
+<span class="pc bpc" id="L58" title="1 of 2 branches missed.">        if (result.hasErrors()) {</span>
+<span class="nc" id="L59">            return &quot;setPatient&quot;;</span>
+        }
+<span class="fc" id="L61">        patient.setId(id);</span>
+<span class="fc" id="L62">        mediscreenPatientClient.setAPatient(patient);</span>
+<span class="fc" id="L63">        return &quot;redirect:/patients/list&quot;;</span>
+    }
+
+    @RequestMapping(value = &quot;/patients/del/{id}&quot;)
+    public String deletePatient(@PathVariable(&quot;id&quot;) int id) {
+<span class="fc" id="L68">        mediscreenPatientClient.deleteAPatient(id);</span>
+<span class="fc" id="L69">        return &quot;redirect:/patients/list&quot;;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

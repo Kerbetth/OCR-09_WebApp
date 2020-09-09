@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AssessmentsControllers.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">mediscreen</a> &gt; <a href="index.source.html" class="el_package">com.medic.mediscreen.controllers</a> &gt; <span class="el_source">AssessmentsControllers.java</span></div><h1>AssessmentsControllers.java</h1><pre class="source lang-java linenums">package com.medic.mediscreen.controllers;
+
+
+import com.medic.mediscreen.client.MediscreenAssessmentsClient;
+import com.medic.mediscreen.client.MediscreenPatHistoryClient;
+import com.medic.mediscreen.client.MediscreenPatientClient;
+import com.medic.mediscreen.dto.AssessInfo;
+import com.medic.mediscreen.dto.Patient;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.time.format.DateTimeFormatter;
+
+/**
+ * -AssessmentsControllers are the endpoint sending request to the assessment service
+ */
+
+@RestController
+<span class="fc" id="L19">public class AssessmentsControllers {</span>
+
+    @Autowired
+    private MediscreenPatientClient mediscreenPatientClient;
+    @Autowired
+    private MediscreenPatHistoryClient mediscreenPatHistoryClient;
+    @Autowired
+    private MediscreenAssessmentsClient mediscreenAssessmentsClient;
+
+    @PostMapping(&quot;/assess/id&quot;)
+    public String assesById(@RequestParam int id) {
+<span class="fc" id="L30">        Patient patient = mediscreenPatientClient.getPatientById(id);</span>
+<span class="fc" id="L31">        return mediscreenAssessmentsClient.getAssessment(</span>
+                new AssessInfo(
+<span class="fc" id="L33">                        patient.getFamily(),</span>
+<span class="fc" id="L34">                        patient.getDob().format(DateTimeFormatter.ISO_LOCAL_DATE),</span>
+<span class="fc" id="L35">                        patient.getSex(),</span>
+<span class="fc" id="L36">                        mediscreenPatHistoryClient.getNotes(id)));</span>
+    }
+
+    @PostMapping(&quot;/assess/familyName&quot;)
+    public String assesByFamilyName(@RequestParam String familyName) {
+<span class="fc" id="L41">        Patient patient = mediscreenPatientClient.getPatientByFamilyName(familyName);</span>
+<span class="fc" id="L42">        return mediscreenAssessmentsClient.getAssessment(</span>
+                new AssessInfo(
+<span class="fc" id="L44">                        patient.getFamily(),</span>
+<span class="fc" id="L45">                        patient.getDob().format(DateTimeFormatter.ISO_LOCAL_DATE),</span>
+<span class="fc" id="L46">                        patient.getSex(),</span>
+<span class="fc" id="L47">                        mediscreenPatHistoryClient.getNotes(patient.getId())));</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>
