@@ -1,7 +1,7 @@
 package com.medic.mediscreen;
 
 import com.medic.mediscreen.client.MediscreenPatHistoryClient;
-import com.medic.mediscreen.dto.CreatePatHistory;
+import com.medic.mediscreen.dto.PatHistory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,11 +27,11 @@ public class PatientControllerIT{
 	@Autowired
 	MockMvc mockMvc;
 
-    CreatePatHistory patHistory = new CreatePatHistory();
+    PatHistory patHistory = new PatHistory();
 
     @BeforeEach
     void setup() {
-	patHistory.setId(1);
+	patHistory.setPatId(1);
 	patHistory.setNote("a note");
     }
 

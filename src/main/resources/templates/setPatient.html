@@ -2,8 +2,8 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Set Patient</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <link rel="stylesheet" href="../../css/bootstrap.min.css" />
+    <meta charset="utf-8" />
+    <link rel="stylesheet" th:href="@{/css/mediscreen.css}"/>
 </head>
 <body>
 <div class="container">
@@ -12,8 +12,7 @@
     </div>
 
     <div class="row">
-        <form action="#" th:action="@{/patients/setting/{id}(id=${patient.id})}" th:object="${patient}"
-              method="put" class="form-horizontal" style="width: 100%">
+        <form action="#" th:action="@{/patients/setting/{id}(id=${patient.id})}" th:object="${patient}" class="form-horizontal" style="width: 100%">
 
             <div class="form-group">
                 <label class="col-sm-2 control-label">Family name:</label>
@@ -64,8 +63,8 @@
             <div class="form-group">
                 <div class="col-sm-12">
                     <input type="hidden" th:field="*{id}">
-                    <a class="btn btn-danger btn-sm" href="/patients/list">Cancel</a>
-                    <input class="btn btn-primary btn-sm" type="submit" value="Set Patient">
+                    <a class="buttonBack" href="/patients/list">Cancel</a>
+                    <input class="buttonAdd" type="submit" value="Set Patient">
                 </div>
             </div>
 

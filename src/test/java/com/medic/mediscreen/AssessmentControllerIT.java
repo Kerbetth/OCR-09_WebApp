@@ -3,7 +3,7 @@ package com.medic.mediscreen;
 import com.medic.mediscreen.client.MediscreenAssessmentsClient;
 import com.medic.mediscreen.client.MediscreenPatHistoryClient;
 import com.medic.mediscreen.client.MediscreenPatientClient;
-import com.medic.mediscreen.dto.CreatePatHistory;
+import com.medic.mediscreen.dto.PatHistory;
 import com.medic.mediscreen.dto.Patient;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -39,12 +39,12 @@ public class AssessmentControllerIT {
     @Autowired
     MockMvc mockMvc;
 
-    CreatePatHistory patHistory = new CreatePatHistory();
+    PatHistory patHistory = new PatHistory();
     Patient patient = new Patient();
 
     @BeforeEach
     void setup() {
-        patHistory.setId(1);
+        patHistory.setPatId(1);
         patHistory.setNote("a note");
         patient.setId(1);
         patient.setDob(LocalDate.of(2000, 02, 02));

@@ -7,14 +7,12 @@ import com.medic.mediscreen.client.MediscreenPatientClient;
 import com.medic.mediscreen.dto.AssessInfo;
 import com.medic.mediscreen.dto.Patient;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.format.DateTimeFormatter;
 
 /**
- * -the root of the url give link to login or create an account
- * -userHome url is the main page of connected users
+ * -AssessmentsControllers are the endpoint sending request to the assessment service
  */
 
 @RestController
