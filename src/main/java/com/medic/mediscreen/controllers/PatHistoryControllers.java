@@ -6,9 +6,11 @@ import com.medic.mediscreen.dto.PatHistory;
 import com.medic.mediscreen.client.MediscreenPatHistoryClient;
 import com.medic.mediscreen.client.MediscreenPatientClient;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,9 +45,12 @@ public class PatHistoryControllers {
     @PostMapping(value = "/patients/patHistory/{id}/adding")
     public String addingHistories(@PathVariable("id") int id, PatHistory patHistory) {
         patHistory.setId(null);
-        patHistory.setPatId(id);
-        mediscreenPatHistoryClient.addAPatHistory(patHistory);
-        return "redirect:/patients/patHistory/"+id+"/list";
+        if(mediscreenPatientClient.getPatientById(id)!=null){
+            patHistory.setPatId(id);
+            mediscreenPatHistoryClient.addAPatHistory(patHistory);
+            return "redirect:/patients/patHistory/"+id+"/list";
+        }
+        throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"No patient correspond to the id provided, note not added");
     }
 
     @GetMapping(value = "/patients/patHistory/{id}/set/{noteId}")
