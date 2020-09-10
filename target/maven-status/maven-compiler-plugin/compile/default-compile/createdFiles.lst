@@ -8,4 +8,5 @@ com\medic\mediscreen\controllers\AssessmentsControllers.class
 com\medic\mediscreen\controllers\PatientControllers.class
 com\medic\mediscreen\controllers\HomeControllers.class
 com\medic\mediscreen\dto\Patient.class
+com\medic\mediscreen\client\ErrorCustomDecoder.class
 com\medic\mediscreen\client\MediscreenPatientClient.class

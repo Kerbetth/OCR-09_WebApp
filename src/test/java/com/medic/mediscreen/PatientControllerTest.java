@@ -1,6 +1,7 @@
 package com.medic.mediscreen;
 
 import com.medic.mediscreen.client.MediscreenPatHistoryClient;
+import com.medic.mediscreen.client.MediscreenPatientClient;
 import com.medic.mediscreen.dto.PatHistory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -23,6 +24,8 @@ public class PatientControllerTest {
 
     @MockBean(name = "com.medic.mediscreen.client.MediscreenPatHistoryClient")
     private MediscreenPatHistoryClient mediscreenPatHistoryClient;
+    @MockBean(name = "com.medic.mediscreen.client.MediscreenPatientClient")
+    private MediscreenPatientClient mediscreenPatientClient;
 
 	@Autowired
 	MockMvc mockMvc;
@@ -54,8 +57,7 @@ public class PatientControllerTest {
 		mockMvc.perform(post("/patients/patHistory/1/adding")
 				.contentType(MediaType.APPLICATION_FORM_URLENCODED)
 				.param("note", patHistory.getNote())
-				.requestAttr("PatHistory", patHistory)
 		)
-				.andExpect(status().is3xxRedirection());
+				.andExpect(status().is4xxClientError());
 	}
 }
