@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PatHistoryControllers.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">mediscreen</a> &gt; <a href="index.source.html" class="el_package">com.medic.mediscreen.controllers</a> &gt; <span class="el_source">PatHistoryControllers.java</span></div><h1>PatHistoryControllers.java</h1><pre class="source lang-java linenums">package com.medic.mediscreen.controllers;
+
+
+import com.medic.mediscreen.client.MediscreenAssessmentsClient;
+import com.medic.mediscreen.dto.PatHistory;
+import com.medic.mediscreen.client.MediscreenPatHistoryClient;
+import com.medic.mediscreen.client.MediscreenPatientClient;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * -All the following endpoints execute CRUD request for the PatHistory Object
+ */
+
+@Controller
+<span class="fc" id="L23">public class PatHistoryControllers {</span>
+
+
+    @Autowired
+    private MediscreenPatHistoryClient mediscreenPatHistoryClient;
+    @Autowired
+    private MediscreenPatientClient mediscreenPatientClient;
+    @Autowired
+    private MediscreenAssessmentsClient mediscreenAssessmentsClient;
+
+    @GetMapping(value = &quot;/patients/patHistory/{id}/list&quot;)
+    public String getHistories(@PathVariable(&quot;id&quot;) int id, Model model) {
+<span class="fc" id="L35">        model.addAttribute(&quot;patHistories&quot;, mediscreenPatHistoryClient.getPatHistories(id));</span>
+<span class="fc" id="L36">        return &quot;patHistory&quot;;</span>
+    }
+
+    @GetMapping(value = &quot;/patients/patHistory/{id}/add&quot;)
+    public String addHistories(@PathVariable(&quot;id&quot;) int id, Model model) {
+<span class="fc" id="L41">        model.addAttribute(&quot;patHistory&quot;, new PatHistory());</span>
+<span class="fc" id="L42">        return &quot;addNotes&quot;;</span>
+    }
+
+    @PostMapping(value = &quot;/patients/patHistory/{id}/adding&quot;)
+    public String addingHistories(@PathVariable(&quot;id&quot;) int id, PatHistory patHistory) {
+<span class="fc" id="L47">        patHistory.setId(null);</span>
+<span class="pc bpc" id="L48" title="1 of 2 branches missed.">        if(mediscreenPatientClient.getPatientById(id)!=null){</span>
+<span class="nc" id="L49">            patHistory.setPatId(id);</span>
+<span class="nc" id="L50">            mediscreenPatHistoryClient.addAPatHistory(patHistory);</span>
+<span class="nc" id="L51">            return &quot;redirect:/patients/patHistory/&quot;+id+&quot;/list&quot;;</span>
+        }
+<span class="fc" id="L53">        throw new ResponseStatusException(HttpStatus.BAD_REQUEST,&quot;No patient correspond to the id provided, note not added&quot;);</span>
+    }
+
+    @GetMapping(value = &quot;/patients/patHistory/{id}/set/{noteId}&quot;)
+    public String setHistories(@PathVariable(&quot;id&quot;) int id,@PathVariable(&quot;noteId&quot;) String noteId, @RequestParam String note, Model model) {
+<span class="nc" id="L58">        model.addAttribute(&quot;patHistory&quot;, new PatHistory(noteId, note, id));</span>
+<span class="nc" id="L59">        return &quot;setNotes&quot;;</span>
+    }
+
+    @RequestMapping(value = &quot;/patients/patHistory/setting&quot;)
+    public String settingHistories(PatHistory patHistory) {
+<span class="nc" id="L64">        mediscreenPatHistoryClient.setAPatHistory(patHistory);</span>
+<span class="nc" id="L65">        return &quot;redirect:/patients/patHistory/&quot;+patHistory.getPatId()+&quot;/list&quot;;</span>
+    }
+
+    @RequestMapping(value = &quot;/patients/patHistory/{id}/del/{noteId}&quot;)
+    public String deletePatient(@PathVariable(&quot;id&quot;) int id,@PathVariable(&quot;noteId&quot;) String noteId) {
+<span class="nc" id="L70">        mediscreenPatHistoryClient.deleteAPatHistory(noteId);</span>
+<span class="nc" id="L71">        return &quot;redirect:/patients/patHistory/&quot;+id+&quot;/list&quot;;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

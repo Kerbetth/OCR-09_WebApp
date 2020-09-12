@@ -2,21 +2,21 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>List of Patient</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <link rel="stylesheet" href="../../css/bootstrap.min.css" />
+    <meta charset="utf-8" />
+    <link rel="stylesheet" th:href="@{/css/mediscreen.css}"/>
 </head>
 <body>
 <div class="container">
     <div class="row">
         <div class="col-6">
-            <a href="/">Back to homepage</a>&nbsp;|&nbsp;
+            <a class="buttonBack" href="/">Back to homepage</a>&nbsp;|&nbsp;
+            <a class="buttonAdd" th:href="@{/patients/add}">Add New Patient</a>
         </div>
     </div>
 
     <div class="row"><h2>Patient list</h2>
     </div>
     <div class="row">
-        <a href="/patients/add" class="btn btn-primary btn-sm">Add New Patient</a>
         <table class="table table-bordered">
             <thead>
             <tr>
@@ -40,14 +40,16 @@
                 <td th:text="${patient.address}"></td>
                 <td th:text="${patient.phone}"></td>
                 <td style="width: 15%" class="text-center">
-                    <a th:href="@{/patients/patHistory/{id}/list(id=${patient.id})}">See notes</a>
+                    <a class="tableButton" th:href="@{/patients/patHistory/{id}/list(id=${patient.id})}">See notes</a>
                 </td>
                 <td style="width: 15%" class="text-center">
-                    <a th:href="@{/assess/id?id={id}(id=${patient.id})}">See assessment</a>
+                    <form method="POST" th:action="@{/assess/id?id={id}(id=${patient.id})}">
+                        <button type="submit" name="submit" value="value" class="tableButton">See assessment</button>
+                    </form>
                 </td>
                 <td style="width: 15%" class="text-center">
-                    <a th:href="@{/patients/set/{id}(id=${patient.id})}" method="get">Edit</a>&nbsp;|&nbsp;
-                    <a th:href="@{/patients/del/{id}(id=${patient.id})}" method="del">Delete</a>
+                    <a class="tableButton" th:href="@{/patients/set/{id}(id=${patient.id})}" >Edit</a>&nbsp;|&nbsp;
+                    <a class="tableButton" th:href="@{/patients/del/{id}(id=${patient.id})}" >Delete</a>
 				</td>
             </tr>
             </tbody>

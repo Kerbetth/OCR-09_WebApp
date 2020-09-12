@@ -7,24 +7,24 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 
-@FeignClient(name = "mediscreenPatient", url = "localhost:8081", primary = false)
+@FeignClient(name = "mediscreenPatient", url = "${PATIENT_URI}", primary = false)
 public interface MediscreenPatientClient {
 
-    @GetMapping(value = "/Patients")
+    @GetMapping(value = "/patients")
     List<Patient> getPatientList();
 
-    @GetMapping(value = "/Patient/id")
+    @GetMapping(value = "/patient/id")
     Patient getPatientById(@RequestParam int id);
 
-    @GetMapping(value = "/Patient/familyName")
+    @GetMapping(value = "/patient/familyName")
     Patient getPatientByFamilyName(@RequestParam String familyName);
 
-    @PostMapping(value = "/Patient/add", consumes = "application/json")
+    @PostMapping(value = "/patient/add", consumes = "application/json")
     void addAPatient(@RequestBody Patient patient);
 
-    @RequestMapping(value = "/Patient/set", consumes = "application/json")
+    @PutMapping(value = "/patient/set", consumes = "application/json")
     void setAPatient(@RequestBody Patient patient);
 
-    @RequestMapping(value = "/Patient/del", consumes = "application/json")
+    @DeleteMapping(value = "/patient/del", consumes = "application/json")
     void deleteAPatient(@RequestParam int patientId);
 }
